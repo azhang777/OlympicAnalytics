@@ -20,18 +20,7 @@ public class CountryDetailsResponse {
         this.name = name;
     }
 
-    public CountryDetailsResponse(String name,
-                                  BigDecimal gdp,
-                                  Integer population,
-                                  Integer numberMedals,
-                                  Integer numberSummerWins,
-                                  Float percentageTotalSummerWins,
-                                  Integer yearFirstSummerWin,
-                                  Integer numberWinterWins,
-                                  Float percentageTotalWinterWins,
-                                  Integer yearFirstWinterWin,
-                                  Integer numberEventsWonByFemaleAthletes,
-                                  Integer numberEventsWonByMaleAthletes) {
+    public CountryDetailsResponse(String name, BigDecimal gdp, Integer population, Integer numberMedals, Integer numberSummerWins, Float percentageTotalSummerWins, Integer yearFirstSummerWin, Integer numberWinterWins, Float percentageTotalWinterWins, Integer yearFirstWinterWin, Integer numberEventsWonByFemaleAthletes, Integer numberEventsWonByMaleAthletes) {
         this.name = name;
         this.gdp = gdp;
         this.population = population;
