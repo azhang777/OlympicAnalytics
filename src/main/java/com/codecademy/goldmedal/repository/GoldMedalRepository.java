@@ -8,18 +8,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GoldMedalRepository extends CrudRepository<GoldMedal, Long> {
-    List<GoldMedal> getByCountryOrderByYearAsc(String countryName);
-    List<GoldMedal> getByCountryOrderByYearDesc(String countryName);
-    List<GoldMedal> getByCountryOrderBySeasonAsc(String countryName);
-    List<GoldMedal> getByCountryOrderBySeasonDesc(String countryName);
-    List<GoldMedal> getByCountryOrderByCityAsc(String countryName);
-    List<GoldMedal> getByCountryOrderByCityDesc(String countryName);
-    List<GoldMedal> getByCountryOrderByNameAsc(String countryName);
-    List<GoldMedal> getByCountryOrderByNameDesc(String countryName);
-    List<GoldMedal> getByCountryOrderByEventAsc(String countryName);
-    List<GoldMedal> getByCountryOrderByEventDesc(String countryName);
-    List<GoldMedal> getByCountryAndSeasonOrderByYearAsc(String countryName, String season);
+    List<GoldMedal> findByCountryOrderByYearAsc(String countryName);
+    List<GoldMedal> findByCountryOrderByYearDesc(String countryName);
+    List<GoldMedal> findByCountryOrderBySeasonAsc(String countryName);
+    List<GoldMedal> findByCountryOrderBySeasonDesc(String countryName);
+    List<GoldMedal> findByCountryOrderByCityAsc(String countryName);
+    List<GoldMedal> findByCountryOrderByCityDesc(String countryName);
+    List<GoldMedal> findByCountryOrderByNameAsc(String countryName);
+    List<GoldMedal> findByCountryOrderByNameDesc(String countryName);
+    List<GoldMedal> findByCountryOrderByEventAsc(String countryName);
+    List<GoldMedal> findByCountryOrderByEventDesc(String countryName);
+    List<GoldMedal> findByCountryAndSeasonOrderByYearAsc(String countryName, String season);
     int countByCountry(String countryName);
     int countBySeason(String season);
     int countByCountryAndGender(String country,String gender);
+    //cant change this count to findCount, either a Spring problem or something was built in a way (on the front probably) that has conflicts with the name change.
 }

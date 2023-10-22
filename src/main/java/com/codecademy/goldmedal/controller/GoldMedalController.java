@@ -45,19 +45,19 @@ public class GoldMedalController {
         List<GoldMedal> medalsList;
         switch (sortBy) {
             case "year":
-                medalsList = ascendingOrder ? this.goldMedalRepository.getByCountryOrderByYearAsc(countryName) : this.goldMedalRepository.getByCountryOrderByYearDesc(countryName);// TODO: list of medals sorted by year in the given order
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountryOrderByYearAsc(countryName) : this.goldMedalRepository.findByCountryOrderByYearDesc(countryName);// TODO: list of medals sorted by year in the given order
                 break;
             case "season":
-                medalsList = ascendingOrder ? this.goldMedalRepository.getByCountryOrderBySeasonAsc(countryName) : this.goldMedalRepository.getByCountryOrderBySeasonDesc(countryName);// TODO: list of medals sorted by season in the given order
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountryOrderBySeasonAsc(countryName) : this.goldMedalRepository.findByCountryOrderBySeasonDesc(countryName);// TODO: list of medals sorted by season in the given order
                 break;
             case "city":
-                medalsList = ascendingOrder ? this.goldMedalRepository.getByCountryOrderByCityAsc(countryName) : this.goldMedalRepository.getByCountryOrderByCityDesc(countryName);// TODO: list of medals sorted by city in the given order
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountryOrderByCityAsc(countryName) : this.goldMedalRepository.findByCountryOrderByCityDesc(countryName);// TODO: list of medals sorted by city in the given order
                 break;
             case "name":
-                medalsList = ascendingOrder ? this.goldMedalRepository.getByCountryOrderByNameAsc(countryName) : this.goldMedalRepository.getByCountryOrderByNameDesc(countryName);// TODO: list of medals sorted by athlete's name in the given order
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountryOrderByNameAsc(countryName) : this.goldMedalRepository.findByCountryOrderByNameDesc(countryName);// TODO: list of medals sorted by athlete's name in the given order
                 break;
             case "event":
-                medalsList = ascendingOrder ? this.goldMedalRepository.getByCountryOrderByEventAsc(countryName) : this.goldMedalRepository.getByCountryOrderByEventDesc(countryName); // TODO: list of medals sorted by event in the given order
+                medalsList = ascendingOrder ? this.goldMedalRepository.findByCountryOrderByEventAsc(countryName) : this.goldMedalRepository.findByCountryOrderByEventDesc(countryName); // TODO: list of medals sorted by event in the given order
                 break;
             default:
                 medalsList = new ArrayList<>();
@@ -68,7 +68,7 @@ public class GoldMedalController {
     }
 
     private CountryDetailsResponse getCountryDetailsResponse(String countryName) {
-        var countryOptional = this.countryRepository.getByName(countryName); // TODO: get the country; this repository method should return a java.util.Optional
+        var countryOptional = this.countryRepository.findByName(countryName); // TODO: get the country; this repository method should return a java.util.Optional
         if (countryOptional.isEmpty()) {
             return new CountryDetailsResponse(countryName);
         }
@@ -76,13 +76,13 @@ public class GoldMedalController {
         var country = countryOptional.get();
         var goldMedalCount = this.goldMedalRepository.countByCountry(countryName); // TODO: get the medal count
 
-        var summerWins = this.goldMedalRepository.getByCountryAndSeasonOrderByYearAsc(countryName, "Summer"); // TODO: get the collection of wins at the Summer Olympics, sorted by year in ascending order
+        var summerWins = this.goldMedalRepository.findByCountryAndSeasonOrderByYearAsc(countryName, "Summer"); // TODO: get the collection of wins at the Summer Olympics, sorted by year in ascending order
         var numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null;
         var totalSummerEvents = this.goldMedalRepository.countBySeason("Summer"); // TODO: get the total number of events at the Summer Olympics
         var percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
         var yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
 
-        var winterWins = this.goldMedalRepository.getByCountryAndSeasonOrderByYearAsc(countryName, "Winter"); // TODO: get the collection of wins at the Winter Olympics
+        var winterWins = this.goldMedalRepository.findByCountryAndSeasonOrderByYearAsc(countryName, "Winter"); // TODO: get the collection of wins at the Winter Olympics
         var numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
         var totalWinterEvents = this.goldMedalRepository.countBySeason("Winter"); // TODO: get the total number of events at the Winter Olympics, sorted by year in ascending order
         var percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
@@ -110,17 +110,17 @@ public class GoldMedalController {
         List<Country> countries;
         switch (sortBy) {
             case "name":
-                countries = ascendingOrder ? this.countryRepository.getAllByOrderByNameAsc() : this.countryRepository.getAllByOrderByNameDesc();// TODO: list of countries sorted by name in the given order
+                countries = ascendingOrder ? this.countryRepository.findAllByOrderByNameAsc() : this.countryRepository.findAllByOrderByNameDesc();// TODO: list of countries sorted by name in the given order
                 break;
             case "gdp":
-                countries = ascendingOrder ? this.countryRepository.getAllByOrderByGdpAsc() : this.countryRepository.getAllByOrderByGdpDesc();// TODO: list of countries sorted by gdp in the given order
+                countries = ascendingOrder ? this.countryRepository.findAllByOrderByGdpAsc() : this.countryRepository.findAllByOrderByGdpDesc();// TODO: list of countries sorted by gdp in the given order
                 break;
             case "population":
-                countries = ascendingOrder ? this.countryRepository.getAllByOrderByPopulationAsc() : this.countryRepository.getAllByOrderByPopulationDesc();// TODO: list of countries sorted by population in the given order
+                countries = ascendingOrder ? this.countryRepository.findAllByOrderByPopulationAsc() : this.countryRepository.findAllByOrderByPopulationDesc();// TODO: list of countries sorted by population in the given order
                 break;
             case "medals":
             default:
-                countries = this.countryRepository.getAllByOrderByNameAsc();// TODO: list of countries in any order you choose; for sorting by medal count, additional logic below will handle that
+                countries = this.countryRepository.findAllByOrderByNameAsc();// TODO: list of countries in any order you choose; for sorting by medal count, additional logic below will handle that
                 break;
         }
 
